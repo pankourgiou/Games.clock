@@ -5,7 +5,7 @@ from datetime import datetime
 # List of OS/distro names corresponding to each hour
 os_names = [
     "Bridge", "Playmobil", "Final Fantasy", "Backgammon", "Lego", "Mahjong tiles",
-    "Domino", "Monopoly", "Minecraft", "Lego", "Iss Pro", "Baseball 9"
+    "Domino", "Crash Dummies", "Minecraft", "Lego", "Lemmings", "Baseball 9"
 ]
 
 def draw_os_clock():
