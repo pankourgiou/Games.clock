@@ -4,7 +4,7 @@ from datetime import datetime
 
 # List of OS/distro names corresponding to each hour
 os_names = [
-    "Bridge", "Bridge with Snow", "Final Fantasy", "Backgammon", "Rio Anti-Rio Bridge", "Mahjong tiles",
+    "Bridge", "Playmobil", "Final Fantasy", "Backgammon", "Lego", "Mahjong tiles",
     "Domino", "Monopoly", "Minecraft", "Lego", "Iss Pro", "Baseball 9"
 ]
 
