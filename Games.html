@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Futuristic Games Clock</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at center, #050510, #000000 80%);
+    font-family: "Orbitron", sans-serif;
+    color: #00ffff;
+  }
+
+  canvas {
+    filter: drop-shadow(0 0 15px #00ffff);
+  }
+
+  .title {
+    position: absolute;
+    top: 30px;
+    font-size: 28px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 15px #00ffff;
+  }
+</style>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="title">FUTURISTIC GAMES CLOCK</div>
+<canvas id="clock" width="500" height="500"></canvas>
+
+<script>
+const canvas = document.getElementById("clock");
+const ctx = canvas.getContext("2d");
+
+const osNames = [
+  "Baseball 9", "Playmobil", "Final Fantasy", "Backgammon",
+  "Lego", "Mahjong", "Domino", "Crash Dummies",
+  "Bridge", "Lego", "Lemmings", "Minecraft"
+];
+
+function drawClock() {
+  const now = new Date();
+
+  const hour = now.getHours() % 12 + now.getMinutes() / 60;
+  const minute = now.getMinutes();
+  const second = now.getSeconds();
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  const cx = canvas.width / 2;
+  const cy = canvas.height / 2;
+
+  ctx.save();
+  ctx.translate(cx, cy);
+
+  // Outer glowing circle
+  ctx.beginPath();
+  ctx.arc(0, 0, 200, 0, Math.PI * 2);
+  ctx.strokeStyle = "#00ffff";
+  ctx.lineWidth = 3;
+  ctx.shadowBlur = 25;
+  ctx.shadowColor = "#00ffff";
+  ctx.stroke();
+
+  // Hour labels
+  ctx.shadowBlur = 10;
+  ctx.font = "14px Orbitron";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+
+  for (let i = 0; i < 12; i++) {
+    const angle = (Math.PI / 6) * i - Math.PI / 2;
+    const x = 160 * Math.cos(angle);
+    const y = 160 * Math.sin(angle);
+    ctx.fillText(osNames[i], x, y);
+  }
+
+  // Hour hand
+  const hourAngle = (Math.PI / 6) * hour - Math.PI / 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(90 * Math.cos(hourAngle), 90 * Math.sin(hourAngle));
+  ctx.strokeStyle = "#ff00ff";
+  ctx.lineWidth = 5;
+  ctx.shadowColor = "#ff00ff";
+  ctx.shadowBlur = 20;
+  ctx.stroke();
+
+  // Minute hand
+  const minuteAngle = (Math.PI / 30) * minute - Math.PI / 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(130 * Math.cos(minuteAngle), 130 * Math.sin(minuteAngle));
+  ctx.strokeStyle = "#00ffff";
+  ctx.lineWidth = 3;
+  ctx.shadowColor = "#00ffff";
+  ctx.shadowBlur = 20;
+  ctx.stroke();
+
+  // Second hand (futuristic pulse)
+  const secondAngle = (Math.PI / 30) * second - Math.PI / 2;
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(150 * Math.cos(secondAngle), 150 * Math.sin(secondAngle));
+  ctx.strokeStyle = "#00ff88";
+  ctx.lineWidth = 2;
+  ctx.shadowColor = "#00ff88";
+  ctx.shadowBlur = 25;
+  ctx.stroke();
+
+  // Center core
+  ctx.beginPath();
+  ctx.arc(0, 0, 8, 0, Math.PI * 2);
+  ctx.fillStyle = "#ffffff";
+  ctx.shadowBlur = 20;
+  ctx.shadowColor = "#ffffff";
+  ctx.fill();
+
+  ctx.restore();
+}
+
+setInterval(drawClock, 1000);
+drawClock();
+</script>
+
+</body>
+</html>
